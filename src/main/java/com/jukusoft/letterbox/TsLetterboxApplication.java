@@ -14,8 +14,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableJpaRepositories({"com.jukusoft.letterbox", "com.jukusoft.authentification.jwt"})
 public class TsLetterboxApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TsLetterboxApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TsLetterboxApplication.class, args);
+    }
 
 }
