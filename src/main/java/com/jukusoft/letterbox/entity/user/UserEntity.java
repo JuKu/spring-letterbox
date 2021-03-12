@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jukusoft.authentification.jwt.account.IAccount;
 import com.jukusoft.letterbox.entity.general.AbstractEntity;
 import com.jukusoft.letterbox.entity.general.LogEntryEntity;
+import com.jukusoft.letterbox.entity.message.Message;
+import com.jukusoft.letterbox.entity.ts.TSGroup;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
@@ -59,6 +61,13 @@ public class UserEntity extends AbstractEntity implements IAccount {
     @OneToMany(/*mappedBy = "customer", */cascade = {CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.LAZY)
     //@Column(name = "user_entity")
     private List<LogEntryEntity> logs;
+
+    @ManyToMany(/*mappedBy = "id", */cascade = {}, fetch = FetchType.LAZY)
+    private List<TSGroup> tsGroups = new ArrayList<>();
+
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @Column(name = "receiver")
+    private List<Message> messages = new ArrayList<>();
 
     public UserEntity(@Size(min = 2, max = 45) @NotEmpty(message = "username is required") String username) {
         Objects.requireNonNull(username);
