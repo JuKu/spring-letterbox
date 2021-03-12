@@ -8,5 +8,10 @@
 		"title": "Should LDAP server automatically create new users from LDAP in database?",
 		"key": "ldap.autocreate.user",
 		"value": "true"
+	},
+	{
+		"title": "Register password",
+		"key": "registration.password",
+		"value": "password"
 	}
 ]
