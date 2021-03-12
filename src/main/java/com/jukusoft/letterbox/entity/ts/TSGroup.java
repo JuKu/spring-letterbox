@@ -1,5 +1,6 @@
 package com.jukusoft.letterbox.entity.ts;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jukusoft.letterbox.entity.general.AbstractEntity;
 import com.jukusoft.letterbox.entity.user.UserEntity;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -24,6 +25,7 @@ public class TSGroup extends AbstractEntity {
     @NotEmpty(message = "name is required")
     private String name;
 
+    @JsonIgnore
     @ManyToMany(/*mappedBy = "id", */cascade = {}, fetch = FetchType.LAZY)
     private List<UserEntity> members;
 

@@ -131,6 +131,10 @@ public class UserEntity extends AbstractEntity implements IAccount {
         this.roles.remove(role);
     }
 
+    public List<TSGroup> listTSGroups() {
+        return tsGroups;
+    }
+
     @PrePersist
     public final void prePersist1() {
         if (this.userPreferences == null) {
