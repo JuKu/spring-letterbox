@@ -1,6 +1,7 @@
 package com.jukusoft.letterbox.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jukusoft.authentification.jwt.account.IAccount;
 import com.jukusoft.letterbox.entity.general.AbstractEntity;
 import com.jukusoft.letterbox.entity.general.LogEntryEntity;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -20,7 +21,7 @@ import java.util.Objects;
 })
 @Cacheable//use second level cache
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class UserEntity extends AbstractEntity {
+public class UserEntity extends AbstractEntity implements IAccount {
 
     @Size(min = 2, max = 45)
     @Column(name = "username", unique = true, nullable = false, updatable = true)
@@ -72,6 +73,11 @@ public class UserEntity extends AbstractEntity {
 
     private UserEntity() {
         //
+    }
+
+    @Override
+    public long getUserID() {
+        return getId();
     }
 
     public String getUsername() {
