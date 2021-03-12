@@ -18,7 +18,7 @@ import java.util.List;
 })
 @Cacheable//use second level cache
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class TSGroup extends AbstractEntity {
+public class TSGroupEntity extends AbstractEntity {
 
     @Size(min = 2, max = 45)
     @Column(name = "name", unique = true, nullable = false, updatable = true)
@@ -29,7 +29,7 @@ public class TSGroup extends AbstractEntity {
     @ManyToMany(/*mappedBy = "id", */cascade = {}, fetch = FetchType.LAZY)
     private List<UserEntity> members;
 
-    public TSGroup(@Size(min = 2, max = 45) @NotEmpty(message = "name is required") String name) {
+    public TSGroupEntity(@Size(min = 2, max = 45) @NotEmpty(message = "name is required") String name) {
         this.name = name;
     }
 

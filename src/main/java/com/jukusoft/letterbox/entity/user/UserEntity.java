@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jukusoft.authentification.jwt.account.IAccount;
 import com.jukusoft.letterbox.entity.general.AbstractEntity;
 import com.jukusoft.letterbox.entity.general.LogEntryEntity;
-import com.jukusoft.letterbox.entity.message.Message;
-import com.jukusoft.letterbox.entity.ts.TSGroup;
+import com.jukusoft.letterbox.entity.message.MessageEntity;
+import com.jukusoft.letterbox.entity.ts.TSGroupEntity;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
@@ -47,6 +47,10 @@ public class UserEntity extends AbstractEntity implements IAccount {
     @NotEmpty(message = "source is required")
     private String source;
 
+    @Size(min = 2, max = 90)
+    @Column(name = "mail", unique = false, nullable = true, updatable = true)
+    private String mail;
+
     @JsonIgnore
     @OneToOne(mappedBy = "user", orphanRemoval = true, optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private UserPreferencesEntity userPreferences;
@@ -63,11 +67,11 @@ public class UserEntity extends AbstractEntity implements IAccount {
     private List<LogEntryEntity> logs;
 
     @ManyToMany(/*mappedBy = "id", */cascade = {}, fetch = FetchType.LAZY)
-    private List<TSGroup> tsGroups = new ArrayList<>();
+    private List<TSGroupEntity> tsGroups = new ArrayList<>();
 
     @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Column(name = "receiver")
-    private List<Message> messages = new ArrayList<>();
+    private List<MessageEntity> messages = new ArrayList<>();
 
     public UserEntity(@Size(min = 2, max = 45) @NotEmpty(message = "username is required") String username) {
         Objects.requireNonNull(username);
@@ -131,8 +135,12 @@ public class UserEntity extends AbstractEntity implements IAccount {
         this.roles.remove(role);
     }
 
-    public List<TSGroup> listTSGroups() {
+    public List<TSGroupEntity> listTSGroups() {
         return tsGroups;
+    }
+
+    public List<MessageEntity> listMessages() {
+        return messages;
     }
 
     @PrePersist

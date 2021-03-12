@@ -1,6 +1,6 @@
 package com.jukusoft.letterbox.controller;
 
-import com.jukusoft.letterbox.entity.ts.TSGroup;
+import com.jukusoft.letterbox.entity.ts.TSGroupEntity;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ public class ReceiverDTO {
 
     private long userID;
     private String username;
-    private List<TSGroup> tsGroups;
+    private List<TSGroupEntity> tsGroups;
 
-    public ReceiverDTO(long userID, String username, List<TSGroup> tsGroups) {
+    public ReceiverDTO(long userID, String username, List<TSGroupEntity> tsGroups) {
         this.userID = userID;
         this.username = username;
         this.tsGroups = tsGroups;
@@ -24,7 +24,7 @@ public class ReceiverDTO {
         return username;
     }
 
-    public List<TSGroup> getTsGroups() {
+    public List<TSGroupEntity> getTsGroups() {
         return tsGroups;
     }
 
