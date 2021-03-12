@@ -1,6 +1,7 @@
 package com.jukusoft.letterbox.service.importer;
 
 import com.jukusoft.letterbox.dao.UserDAO;
+import com.jukusoft.letterbox.entity.message.MessageEntity;
 import com.jukusoft.letterbox.entity.user.UserEntity;
 import com.jukusoft.letterbox.service.PasswordService;
 import com.jukusoft.letterbox.utils.ImportUtils;
@@ -38,6 +39,9 @@ public class DemoDataImporter implements InitializingBean {
             //create demo user and add it to first customer
             UserEntity user = new UserEntity("admin");
             user.setPassword(passwordService.getPasswordEncoder().encode("admin"));
+            user = userDAO.save(user);
+
+            user.addMessage(new MessageEntity(user, user, false, "test", "test2"));
             userDAO.save(user);
 
             if (user.getId() == 0) {

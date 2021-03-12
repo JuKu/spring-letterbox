@@ -64,7 +64,7 @@ public class UserEntity extends AbstractEntity implements IAccount {
 
     @OneToMany(/*mappedBy = "customer", */cascade = {CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.LAZY)
     //@Column(name = "user_entity")
-    private List<LogEntryEntity> logs;
+    private List<LogEntryEntity> logs = new ArrayList<>();
 
     @ManyToMany(/*mappedBy = "id", */cascade = {}, fetch = FetchType.LAZY)
     private List<TSGroupEntity> tsGroups = new ArrayList<>();
@@ -141,6 +141,10 @@ public class UserEntity extends AbstractEntity implements IAccount {
 
     public List<MessageEntity> listMessages() {
         return messages;
+    }
+
+    public void addMessage(MessageEntity message) {
+        this.messages.add(message);
     }
 
     @PrePersist

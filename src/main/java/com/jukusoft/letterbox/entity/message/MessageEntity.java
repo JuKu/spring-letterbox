@@ -44,6 +44,10 @@ public class MessageEntity extends AbstractEntity {
         this.text = text;
     }
 
+    protected MessageEntity() {
+        //
+    }
+
     public UserEntity getReceiver() {
         return receiver;
     }
