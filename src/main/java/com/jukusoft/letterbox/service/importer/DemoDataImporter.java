@@ -37,7 +37,7 @@ public class DemoDataImporter implements InitializingBean {
             logger.info("create demo user 'admin'");
 
             //create demo user and add it to first customer
-            UserEntity user = new UserEntity("admin");
+            UserEntity user = new UserEntity("admin", "Admin", "Admin");
             user.setPassword(passwordService.getPasswordEncoder().encode("admin"));
             user = userDAO.save(user);
 

@@ -73,7 +73,15 @@ public class UserEntity extends AbstractEntity implements IAccount {
     @Column(name = "receiver")
     private List<MessageEntity> messages = new ArrayList<>();
 
-    public UserEntity(@Size(min = 2, max = 45) @NotEmpty(message = "username is required") String username) {
+    @Size(min = 2, max = 90)
+    @Column(name = "prename", unique = false, nullable = false, updatable = true)
+    private String prename;
+
+    @Size(min = 2, max = 90)
+    @Column(name = "lastname", unique = false, nullable = false, updatable = true)
+    private String lastname;
+
+    public UserEntity(@Size(min = 2, max = 45) @NotEmpty(message = "username is required") String username, String prename, String lastname) {
         Objects.requireNonNull(username);
 
         if (username.isEmpty()) {
@@ -81,6 +89,8 @@ public class UserEntity extends AbstractEntity implements IAccount {
         }
 
         this.username = username;
+        this.prename = prename;
+        this.lastname = lastname;
         this.source = "local";
     }
 
